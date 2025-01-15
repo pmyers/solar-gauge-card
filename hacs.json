@@ -1,0 +1,6 @@
+{
+    "name": "Solar gauge card",
+    "country": "SK",
+    "homeassistant": "2024.6.3",
+    "hacs": "2.0.1"
+  }
