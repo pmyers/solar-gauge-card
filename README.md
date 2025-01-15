@@ -66,8 +66,8 @@ We recommend looking at the [Example usage section](#example-usage) to understan
 
 Total Production Value = Solar Power + Battery Power + Grid Out Power
 
-#### Grid Power options
-Grid Power could be setup in one sensor (sensor.grid_power) having positive and negative value, representing consumption from grid or feeding to grid. Eventually, grid power could be setup with 2 sensors: sensor.grid_power_out (consumption from grid) and sensor.grid_power_in (feeding grid). If all sensors are setup, then out and in sensors are ignored.
+#### Grid/Battery Power options
+Grid/Battery Power could be setup in one sensor (sensor.grid/battery_power) having positive and negative value, representing consumption from grid/battery or feeding to grid/battery. Eventually, grid/battery power could be setup with 2 sensors: sensor.grid/battery_power_out (consumption from grid/battery) and sensor.grid/battery_power_in (feeding grid/battery). If all sensors are setup, then out and in sensors are ignored.
 
 Minimum setup:
 ```yaml
@@ -85,28 +85,23 @@ Full setup:
 type: custom:solar-gauge-card
 solarPower: 
   entity: sensor.solar_power
-  color: "#aaaaaa"
 homeConsumption: 
   entity: sensor.home_consumption
-  color: "#aaa00a"
 gridPower: 
   entity: sensor.grid_power
   out:
     entity: sensor.grid_power_out
-    color: "#ff00ff"
   in:
     entity: sensor.grid_power_in
-    color: "#f0ff00"
 batteryPower: 
   entity: sensor.battery_power
   out:
-    color: "#000000"
+    entity: sensor.battery_power_out
   in:
-    color: "#00ffff"
+    entity: sensor.battery_power_in
 battery: 
   capacity:
     entity: sensor.battery_capacity
-    color: "#0aa0f0"
   temperature: 
     entity: sensor.battery_temperature
 gaugeWidth: 15
