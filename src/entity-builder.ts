@@ -138,11 +138,11 @@ export class EntityBuilder {
             color: '',
             out: {
                 entity: hass.states[config.gridPower?.out?.entity],
-                color: config.gridPower?.out?.color || this.gridOutColor
+                color: this.gridOutColor
             },
             in: {
                 entity: hass.states[config.gridPower?.in?.entity],
-                color: config.gridPower?.in?.color || this.gridInColor
+                color: this.gridInColor
             }
         };
     }
@@ -153,11 +153,11 @@ export class EntityBuilder {
             color: '',
             out: {
                 entity: hass.states[config.batteryPower?.out?.entity],
-                color: config.batteryPower?.out?.color || this.batteryPowerOutColor
+                color: this.batteryPowerOutColor
             },
             in: {
                 entity: hass.states[config.batteryPower?.in?.entity],
-                color: config.batteryPower?.in?.color || this.batteryPowerInColor
+                color: this.batteryPowerInColor
             }
         };
     }
@@ -165,7 +165,7 @@ export class EntityBuilder {
     public buildSolarPowerEntity(hass: HomeAssistant, config: LovelaceCardConfig): SimpleSensor {
         return {
             entity: hass.states[config.solarPower.entity],
-            color: config.solarPower?.color || this.solarColor,
+            color: this.solarColor,
             text: "Solar"
         }
     }
@@ -173,7 +173,7 @@ export class EntityBuilder {
     public buildHomeConsumptionEntity(hass: HomeAssistant, config: LovelaceCardConfig): SimpleSensor {
         return {
             entity: hass.states[config.homeConsumption.entity],
-            color: config.homeConsumption?.color || this.homeColor,
+            color: this.homeColor,
             text: "Home"
         }
     }
@@ -182,7 +182,7 @@ export class EntityBuilder {
         return {
             capacity: {
                 entity: hass.states[config.battery?.capacity?.entity],
-                color: config.battery?.capacity?.color || this.batteryColor
+                color: this.batteryColor
             },
             temperature: {
                 entity: hass.states[config.battery?.temperature?.entity]

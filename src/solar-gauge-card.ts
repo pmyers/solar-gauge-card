@@ -119,18 +119,19 @@ export class SolarGaugeCard extends LitElement {
       const emptyXEnd = xStart + (batteryCapacityValue - xMin) * (xEnd - xStart) / (xMax - xMin);
       const cellFullColor = entity.capacity.color;
 
-      return svg`<text x="${xStart + 40}" y="${yStart - 16}" class="svg-text svg-text-middle" style="font-size: 10px;">${batteryCapacityValue}${entity.capacity.entity.attributes.unit_of_measurement}</text>
+      return svg`
+          <text id="battery-capacity-value" x="${xStart + 40}" y="${yStart - 16}" class="svg-text svg-text-middle" style="font-size: 10px;">${batteryCapacityValue}${entity.capacity.entity.attributes.unit_of_measurement}</text>
          ${entity.temperature.entity
           ? svg`
-           <text x="${xStart}" y="${yStart - 16}" class="svg-text svg-text-middle" style="font-size: 10px;">${Number(entity.temperature.entity.state)}${entity.temperature.entity.attributes.unit_of_measurement}</text>
+          <text id="battery-temperature-value" x="${xStart}" y="${yStart - 16}" class="svg-text svg-text-middle" style="font-size: 10px;">${Number(entity.temperature.entity.state)}${entity.temperature.entity.attributes.unit_of_measurement}</text>
              ` : ``}
-           <line id="batteryCellFull" x1="${xStart}" y1="${yStart}" x2="${xEnd}" y2="${yStart}" stroke="${cellFullColor}" stroke-width="${strokewidth}"
+           <line id="battery-cell-full" x1="${xStart}" y1="${yStart}" x2="${xEnd}" y2="${yStart}" stroke="${cellFullColor}" stroke-width="${strokewidth}"
                      stroke-dasharray="${dash} ${gap}">
            </line>
-           <line id="batteryCellEmpty" x1="${xEnd}" y1="${yStart}" x2="${emptyXEnd}" y2="${yStart}" stroke="lightgray" stroke-width="${strokewidth}"
+           <line id="battery-cell-empty" x1="${xEnd}" y1="${yStart}" x2="${emptyXEnd}" y2="${yStart}" stroke="lightgray" stroke-width="${strokewidth}"
                      stroke-dasharray="${dash} ${gap}">
            </line>
-           <rect id="batteryBox" x="${xStart - 3}" y="${yStart - 9}" rx="3" ry="3" width="${length + 6}" height="${strokewidth + 6}" 
+           <rect id="battery-box" x="${xStart - 3}" y="${yStart - 9}" rx="3" ry="3" width="${length + 6}" height="${strokewidth + 6}" 
                      style="fill:none;stroke-width:2;stroke:${cellFullColor}"></rect>
            <rect x="${xStart + length + 2}" y="${yStart - 5}" rx="3" ry="3" width="5" height="10" style="fill:${cellFullColor}"></rect>
         `;
@@ -208,30 +209,30 @@ export class SolarGaugeCard extends LitElement {
        ${this._gauge(radiusCons, this.homeConsumptionEntity.value + batteryInValue, totalConsValue, 'circle-battery-in')}
        ${this._gauge(radiusCons, this.homeConsumptionEntity.value, totalConsValue, 'circle-home')}
 
-        <text x="${this.svgX - radiusProd - this.calculatedStrokeWidth / 2}" y="${this.svgY * 2.5}" class="svg-text svg-text-description svg-text-left" style="fill:${this.homeConsumptionEntity.textColor}">
+    <text id="gauge-home-text" x="${this.svgX - radiusProd - this.calculatedStrokeWidth / 2}" y="${this.svgY * 2.5}" class="svg-text svg-text-description svg-text-left" style="fill:${this.homeConsumptionEntity.textColor}">
         ${this.homeConsumptionEntity.text}
     </text>
-    <text x="${this.svgX - radiusProd - this.calculatedStrokeWidth / 2}" y="${this.svgY * 2.7}" class="svg-text svg-text-value svg-text-left">
+    <text id="gauge-home-value" x="${this.svgX - radiusProd - this.calculatedStrokeWidth / 2}" y="${this.svgY * 2.7}" class="svg-text svg-text-value svg-text-left">
         ${this.homeConsumptionEntity.value} ${this.homeConsumptionEntity.entity.attributes.unit_of_measurement}
     </text>
-    <text x="${this.svgX}" y="${this.svgY * 1.6}" class="svg-text svg-bigtext-description svg-text-middle" style="fill:${this.gridEntity.textColor};">
+    <text id="gauge-grid-text" x="${this.svgX}" y="${this.svgY * 1.6}" class="svg-text svg-bigtext-description svg-text-middle" style="fill:${this.gridEntity.textColor};">
         ${this.gridEntity.text}
     </text>
-    <text x="${this.svgX}" y="${this.svgY * 2}" class="svg-text svg-bigtext-value svg-text-middle" style="fill:${this.gridEntity.valueColor};">
+    <text id="gauge-grid-value" x="${this.svgX}" y="${this.svgY * 2}" class="svg-text svg-bigtext-value svg-text-middle" style="fill:${this.gridEntity.valueColor};">
         ${this.gridEntity.value} ${this.gridEntity.entity.attributes.unit_of_measurement}
     </text>
-    <text  x="${this.svgX + radiusProd + this.calculatedStrokeWidth / 2}" y="${this.svgY * 2.5}" class="svg-text svg-text-description svg-text-right" style="fill: ${this.solarEntity.textColor}">
+    <text id="gauge-solar-text" x="${this.svgX + radiusProd + this.calculatedStrokeWidth / 2}" y="${this.svgY * 2.5}" class="svg-text svg-text-description svg-text-right" style="fill: ${this.solarEntity.textColor}">
         ${this.solarEntity.text}
     </text>
-    <text x="${this.svgX + radiusProd + this.calculatedStrokeWidth / 2}" y="${this.svgY * 2.7}" class="svg-text svg-text-value svg-text-right" style="fill: ${this.solarEntity.valueColor}">
+    <text id="gauge-solar-value" x="${this.svgX + radiusProd + this.calculatedStrokeWidth / 2}" y="${this.svgY * 2.7}" class="svg-text svg-text-value svg-text-right" style="fill: ${this.solarEntity.valueColor}">
         ${this.solarEntity.value} ${this.solarEntity.entity.attributes.unit_of_measurement}
     </text>
-      <text  x="${this.svgX + radiusProd + this.calculatedStrokeWidth / 2}" y="${this.svgY * 2.9}" class="svg-text svg-text-description svg-text-right" style="fill: ${this.batteryPowerEntity.textColor || 'none'}">
-    ${this.batteryPowerEntity.text || ''}
-  </text>
-  <text x="${this.svgX + radiusProd + this.calculatedStrokeWidth / 2}" y="${this.svgY * 3.1}" class="svg-text svg-text-value svg-text-right" style="fill: ${this.batteryPowerEntity.valueColor || 'none'}">
-    ${this.batteryPowerEntity.value} ${this.batteryPowerEntity.entity?.attributes.unit_of_measurement}
-  </text>
+    <text id="gauge-battery-text" x="${this.svgX + radiusProd + this.calculatedStrokeWidth / 2}" y="${this.svgY * 2.9}" class="svg-text svg-text-description svg-text-right" style="fill: ${this.batteryPowerEntity.textColor || 'none'}">
+        ${this.batteryPowerEntity.text || ''}
+    </text>
+    <text id="gauge-battery-value" x="${this.svgX + radiusProd + this.calculatedStrokeWidth / 2}" y="${this.svgY * 3.1}" class="svg-text svg-text-value svg-text-right" style="fill: ${this.batteryPowerEntity.valueColor || 'none'}">
+        ${this.batteryPowerEntity.value} ${this.batteryPowerEntity.entity?.attributes.unit_of_measurement}
+    </text>
 
         ${battery}
       </svg>
