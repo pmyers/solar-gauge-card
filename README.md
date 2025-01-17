@@ -1,9 +1,13 @@
 # solar-gauge-card
 Solar gauge card for Home Assistant
 
+<img src="images/solar-gauge-card.png">
+
 ## Goal
 
 The goal is to display Solar production and its distribution to home, grid or battery in gauge style.
+
+<a href="https://my.home-assistant.io/redirect/hacs_repository/?owner=haluska77&repository=solar-gauge-card&category=solar" target="_blank" rel="noreferrer noopener"><img src="https://my.home-assistant.io/badges/hacs_repository.svg" alt="Open your Home Assistant instance and open a repository inside the Home Assistant Community Store." /></a>
 
 ## Install
 
@@ -106,5 +110,3 @@ battery:
     entity: sensor.battery_temperature
 gaugeWidth: 15
 ```
-
-
