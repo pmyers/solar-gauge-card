@@ -1,7 +1,7 @@
 # solar-gauge-card
 Solar gauge card for Home Assistant
 
-<img src="images/solar-gauge-card.png">
+![Card Preview](images/solar-gauge-card.png)
 
 ## Goal
 
