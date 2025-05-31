@@ -65,6 +65,11 @@ export class EntityBuilder {
         let powerActive = true;
         if (power.entity) {
             powerValue = Number(power.entity.state);
+            // --- Begin: Inversion logic ---
+            if (power.invert) {
+                powerValue = -powerValue;
+            }
+            // --- End: Inversion logic ---
             power.color = powerValue > 0 ? power.out.color : power.in.color;
             powerActive = true;
         } else {
@@ -84,6 +89,11 @@ export class EntityBuilder {
                         throw new Error("At least one of the 'out' or 'in' entities must be positive.");
                     }
                 }
+                // --- Begin: Inversion logic ---
+                if (power.invert) {
+                    powerValue = -powerValue;
+                }
+                // --- End: Inversion logic ---
             } else {
                 if ((power.out.entity && !power.in.entity) || (!power.out.entity && power.in.entity)) {
                     throw new Error("Invalid configuration.");
@@ -143,7 +153,8 @@ export class EntityBuilder {
             in: {
                 entity: hass.states[config.gridPower?.in?.entity],
                 color: this.gridInColor
-            }
+            },
+            invert: !!config.gridPower?.invert // Add this line
         };
     }
 
@@ -158,7 +169,8 @@ export class EntityBuilder {
             in: {
                 entity: hass.states[config.batteryPower?.in?.entity],
                 color: this.batteryPowerInColor
-            }
+            },
+            invert: !!config.batteryPower?.invert // Add this line
         };
     }
 

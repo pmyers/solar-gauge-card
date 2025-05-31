@@ -93,12 +93,14 @@ homeConsumption:
   entity: sensor.home_consumption
 gridPower: 
   entity: sensor.grid_power
+  invert: true   # <--- Add this line to invert grid power sign
   out:
     entity: sensor.grid_power_out
   in:
     entity: sensor.grid_power_in
 batteryPower: 
   entity: sensor.battery_power
+  invert: true   # <--- Add this line to invert battery power sign
   out:
     entity: sensor.battery_power_out
   in:
@@ -110,3 +112,4 @@ battery:
     entity: sensor.battery_temperature
 gaugeWidth: 15
 ```
+_Add `invert: true` under `gridPower:` or `batteryPower:` to reverse the sign of those values if needed for your inverter._

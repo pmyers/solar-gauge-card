@@ -15,6 +15,7 @@ export interface SimpleSensor extends BaseSensor {
 export interface InOutSensor extends BaseSensor {
     out: BaseSensor;
     in: BaseSensor;
+    invert?: boolean; // Add this line
 }
 
 export interface BatterySensor {
