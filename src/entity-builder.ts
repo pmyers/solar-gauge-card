@@ -26,7 +26,7 @@ export class EntityBuilder {
         new Map<string, Partial<Sensor>>([
             [EntityBuilder.IN, {
                 valueColor: 'green',
-                text: 'Grid Import',
+                text: 'Grid Export',
                 active: true
             }],
             [EntityBuilder.ZERO, {
@@ -36,7 +36,7 @@ export class EntityBuilder {
             }],
             [EntityBuilder.OUT, {
                 valueColor: 'red',
-                text: 'Grid Export',
+                text: 'Grid Import',
                 active: true
             }],
         ]);
